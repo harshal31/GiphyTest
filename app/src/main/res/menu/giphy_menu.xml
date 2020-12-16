@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/gRating"
+        android:title="@string/g_rating" />
+
+    <item
+        android:id="@+id/pgRating"
+        android:title="@string/pg_rating" />
+
+    <item
+        android:id="@+id/rgRating"
+        android:title="@string/rg_rating" />
+
+    <item
+        android:id="@+id/rRating"
+        android:title="@string/r_rating" />
+</menu>

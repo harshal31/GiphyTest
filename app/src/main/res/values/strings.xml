@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Giphy</string>
+    <string name="page_title">Trending</string>
+    <string name="g_rating">G</string>
+    <string name="pg_rating">PG</string>
+    <string name="rg_rating">RG</string>
+    <string name="r_rating">R</string>
+</resources>
