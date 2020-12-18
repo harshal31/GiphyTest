@@ -1,13 +1,18 @@
 package com.example.giphytest.constant
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
+import android.net.ConnectivityManager
 import android.view.View
-import android.widget.Toast
+import android.widget.ImageView
+import androidx.core.content.getSystemService
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
-import com.example.giphytest.R
-import com.example.giphytest.sealedAndenums.Anim
+import com.bumptech.glide.GlideBuilder
+import com.bumptech.glide.annotation.GlideModule
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.module.AppGlideModule
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.signature.ObjectKey
 import com.google.android.material.snackbar.Snackbar
 
 fun View.snack(data: Any, length: Int = Snackbar.LENGTH_SHORT) {
@@ -20,57 +25,26 @@ fun View.snack(data: Any, length: Int = Snackbar.LENGTH_SHORT) {
     }
 }
 
-fun Context.toast(data: String) {
-    Toast.makeText(this, data, Toast.LENGTH_SHORT).show()
-}
 
-internal fun setFragment(
-        fragment: Fragment,
-        fragmentManager: androidx.fragment.app.FragmentManager,
-        container: Int,
-        addToBackStack: Boolean = false,
-        anim: Anim = Anim.SLIDE,
-        isAdd: Boolean = false
-) {
-
-    val transaction = fragmentManager.beginTransaction()
-
-    if (addToBackStack)
-        transaction.addToBackStack(fragment.javaClass.name)
-
-    when (anim) {
-        Anim.FADE -> transaction.setCustomAnimations(
-                R.anim.fragment_fade_enter,
-                R.anim.fragment_fade_exit,
-                R.anim.fragment_fade_enter,
-                R.anim.fragment_fade_exit
-        )
-        Anim.SLIDE -> transaction.setCustomAnimations(
-                android.R.anim.slide_in_left,
-                android.R.anim.slide_out_right,
-                android.R.anim.slide_in_left,
-                android.R.anim.slide_out_right
-        )
-        Anim.OPEN_CLOSE -> transaction.setCustomAnimations(
-                R.anim.fragment_open_enter,
-                R.anim.fragment_close_enter,
-                R.anim.fragment_open_enter,
-                R.anim.fragment_close_enter
-        )
-        Anim.ENTER_EXIT -> transaction.setCustomAnimations(
-                R.anim.fragment_open_exit,
-                R.anim.fragment_close_exit,
-                R.anim.fragment_open_exit,
-                R.anim.fragment_close_exit
-        )
-        Anim.NONE -> logd("no animation")
-    }
-    if (isAdd) {
-        transaction.add(container, fragment).commit()
-    } else {
-        transaction.replace(container, fragment).commit()
+@GlideModule
+class AppNameGlideModule : AppGlideModule() {
+    override fun applyOptions(context: Context, builder: GlideBuilder) {
+        super.applyOptions(context, builder)
+        builder.apply {
+            RequestOptions().diskCacheStrategy(DiskCacheStrategy.DATA).signature(
+                ObjectKey(System.currentTimeMillis().toShort())
+            )
+        }
     }
 }
 
-fun logd(s: String) = Log.d("commonTag", s);
+
+
+fun Context.isConnected(): Boolean {
+    val connectivityManager = getSystemService<ConnectivityManager>()
+    val networkInfo = connectivityManager?.activeNetworkInfo
+    return networkInfo?.isConnected ?: false
+}
+
+
 

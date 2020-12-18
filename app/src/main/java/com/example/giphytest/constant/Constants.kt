@@ -17,4 +17,17 @@ object Constants {
     const val PG_RATING = "pg"
     const val RG_RATING = "rg"
 
+
+    //fragment save state
+    const val ADAPTER_STATE = "adapterState"
+
+    //animation duration
+    const val DURATION = 1000L
+
+
+
+    //cache constants
+    const val CACHE_CONTROL = "Cache-Control"
+    const val PUBLIC_MAX_AGE = "public, max-age="
+    const val PUBLIC_ONLY_CACHED = "public, only-if-cached, max-stale="
 }

@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.giphytest.BR
 import com.example.giphytest.R
 import com.example.giphytest.base.BaseErrorCallback
@@ -39,13 +40,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
         supportActionBar?.setHomeButtonEnabled(value)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        android.R.id.home -> {
-            onBackPressed()
-            true
-        }
-        else              -> super.onOptionsItemSelected(item)
-    }
+    override fun onNavigateUp(): Boolean = findNavController(R.id.nav_host_fragment).navigateUp()
 
     override fun onNetworkChanged(message: String) {
         binding.root.snack(message)

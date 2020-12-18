@@ -1,13 +1,19 @@
 package com.example.giphytest.ui
 
+import android.os.Build
 import android.os.Bundle
+import androidx.annotation.RequiresApi
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupWithNavController
 import com.example.giphytest.R
 import com.example.giphytest.constant.Constants
-import com.example.giphytest.constant.setFragment
 import com.example.giphytest.databinding.ActivityMainBinding
-import com.example.giphytest.ui.gif_grid.GifGridFragment
 import com.jio.media.jioguard.base.BaseActivity
 
+@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,8 +22,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         setUpListener()
     }
 
+
     override fun setUpUi() {
-        setFragment(GifGridFragment(), supportFragmentManager, binding.fragmentLayoutContainer.id)
+        val navController = (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
+        binding.materialToolbar.setupWithNavController(navController, appBarConfiguration)
+        binding.materialToolbar.setNavigationOnClickListener {
+            navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+        }
     }
 
     private fun setUpListener() {

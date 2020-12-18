@@ -18,9 +18,12 @@ abstract class BaseViewModel(application: Application) : AndroidViewModel(applic
     val dataManager: ApiHelper = ApiManager
     var commonErrorCallback: BaseErrorCallback? = null
     val serverStatus = MutableLiveData<ServerStatus>()
+    val isDisplayBackButton = MutableLiveData(false)
 
-    suspend fun <T> safeCoroutineCall(retroFun: suspend () -> Response<T>, block: (apiData: T?, apiStatus: ApiStatus) -> Unit) {
-        startLoader()
+
+
+    suspend fun <T> safeCoroutineCall(retroFun: suspend () -> Response<T>, isShowProgress: Boolean = false, block: (apiData: T?, apiStatus: ApiStatus) -> Unit) {
+        startLoader(isShowProgress)
         withContext(Dispatchers.IO) {
             try {
                 val response = retroFun.invoke()
@@ -52,7 +55,7 @@ abstract class BaseViewModel(application: Application) : AndroidViewModel(applic
         }
     }
 
-    fun setServerErrorMsg(status: ServerStatus) {
+    private fun setServerErrorMsg(status: ServerStatus) {
         serverStatus.postValue(status)
     }
 
@@ -69,8 +72,10 @@ abstract class BaseViewModel(application: Application) : AndroidViewModel(applic
     }
 
 
-    fun startLoader() {
-        serverStatus.value = ServerStatus.ON_PROGRESS
+    private fun startLoader(isShowProgress: Boolean) {
+        if (isShowProgress.not()) {
+            serverStatus.value = ServerStatus.ON_PROGRESS
+        }
     }
 
     override fun onCleared() {

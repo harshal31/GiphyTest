@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_flow_graph"
+    app:startDestination="@id/gifGridFragment">
+
+    <fragment
+        android:id="@+id/gifGridFragment"
+        android:name="com.example.giphytest.ui.gif_grid.GifGridFragment"
+        tools:layout="@layout/fragment_gif_grid"
+        android:label="GifGridFragment" >
+        <action
+            android:id="@+id/action_gifGridFragment_to_gifDetailFragment"
+            app:destination="@id/gifDetailFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_detail"
+        android:id="@+id/gifDetailFragment"
+        android:name="com.example.giphytest.ui.gif_detail.GifDetailFragment"
+        android:label="GifDetailFragment" />
+</navigation>

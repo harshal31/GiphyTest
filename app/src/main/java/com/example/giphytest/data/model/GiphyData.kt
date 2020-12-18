@@ -320,7 +320,8 @@ data class DataItem(
         val slug: String? = null,
 
         @field:SerializedName("username")
-        val username: String? = null
+        val username: String? = null,
+
 ) : Parcelable
 
 @Parcelize

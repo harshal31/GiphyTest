@@ -6,36 +6,25 @@
     <data>
 
         <variable
-            name="viewModel"
+            name="model"
             type="com.example.giphytest.ui.MainViewModel" />
-
-        <variable
-            name="dataItem"
-            type="com.example.giphytest.data.model.DataItem" />
-
     </data>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/rootConstraint"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/ivGiphy"
-            gifUrl="@{dataItem.images.previewGif.url}"
+            android:id="@+id/ivGiphyDetail"
+            gifUrl="@{model.gifDetailData.images.previewGif.url}"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:transitionName="data"
-            android:layout_marginBottom="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="10:3"
+            app:layout_constraintDimensionRatio="H,2:3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription,UnusedAttribute" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>

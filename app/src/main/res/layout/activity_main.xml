@@ -8,6 +8,8 @@
         <variable
             name="viewModel"
             type="com.example.giphytest.ui.MainViewModel" />
+
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,23 +20,29 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/materialToolbar"
             style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            srcData="@{viewModel.isDisplayBackButton}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:menu="@menu/giphy_menu"
-            app:layout_constraintBottom_toTopOf="@+id/fragmentLayoutContainer"
+            app:contentInsetStartWithNavigation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:menu="@menu/giphy_menu"
             app:title="@string/page_title" />
 
-        <FrameLayout
-            android:id="@+id/fragmentLayoutContainer"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nav_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            app:defaultNavHost="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/materialToolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/materialToolbar"
+            app:navGraph="@navigation/app_flow_graph" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

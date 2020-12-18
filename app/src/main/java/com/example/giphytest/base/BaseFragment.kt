@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.SavedStateViewModelFactory
 import androidx.lifecycle.ViewModelProvider
 import com.example.giphytest.BR
 import com.example.giphytest.base.BaseErrorCallback
@@ -23,21 +24,17 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
 
     lateinit var baseActivity: BaseActivity<*, *>
     open lateinit var binding: T
-    open lateinit var viewModel: V
+    open var viewModel: V? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         baseActivity = context as BaseActivity<*, *>
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-        viewModel = ViewModelProvider(this).get(getModel)
-        viewModel.setCallBack(this)
+        viewModel = if (isSaveFragmentState) ViewModelProvider(this, SavedStateViewModelFactory(baseActivity.application, this)).get(getModel) else ViewModelProvider(this).get(getModel)
+        viewModel?.setCallBack(this)
         binding.lifecycleOwner = this
         binding.setVariable(BR.viewModel, viewModel)
         return binding.root
@@ -61,4 +58,5 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
     protected abstract fun setUpListener()
     protected abstract val getModel: Class<V>
     protected abstract val layoutId: Int
+    protected abstract val isSaveFragmentState: Boolean
 }

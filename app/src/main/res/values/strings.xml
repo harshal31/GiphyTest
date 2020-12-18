@@ -5,4 +5,5 @@
     <string name="pg_rating">PG</string>
     <string name="rg_rating">RG</string>
     <string name="r_rating">R</string>
+    <string name="shared_transition">shared_element_transition</string>
 </resources>
