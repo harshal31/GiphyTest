@@ -1,10 +1,8 @@
 package com.example.giphytest.constant
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
 import android.view.View
-import android.widget.ImageView
 import androidx.core.content.getSystemService
 import androidx.core.view.isVisible
 import com.bumptech.glide.GlideBuilder

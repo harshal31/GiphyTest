@@ -29,7 +29,7 @@ class GifModel(application: Application, private val saveStateHandle: SavedState
         adapter.viewModel = shareModel
     }
 
-    fun requestTrendingGiphy(limit: Int = 25, rating: String = "g") {
+    fun requestTrendingGiphy(limit: Int = 25, rating: String = "g", isFromPagination: Boolean = false) {
         previousRating = rating
         val map = mapOf<String, Any>(
             Constants.REQUEST_API_KEY to Constants.API_KEY,
@@ -38,7 +38,7 @@ class GifModel(application: Application, private val saveStateHandle: SavedState
         )
 
         viewModelScope.launch {
-            safeCoroutineCall({ dataManager.getTrendingGiphy(map) }, limit > 25) { apiData, _ ->
+            safeCoroutineCall({ dataManager.getTrendingGiphy(map) }, isFromPagination) { apiData, _ ->
                 trendingGiphyResponse.value = apiData
             }
         }

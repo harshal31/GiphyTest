@@ -22,7 +22,7 @@ object Constants {
     const val ADAPTER_STATE = "adapterState"
 
     //animation duration
-    const val DURATION = 1000L
+    const val DURATION = 500L
 
 
 

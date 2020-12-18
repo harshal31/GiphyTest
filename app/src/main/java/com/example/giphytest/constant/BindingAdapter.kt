@@ -36,7 +36,6 @@ object BindingAdapter {
             adapter.setHasStableIds(true)
         }
 
-
         this.adapter = adapter
     }
 

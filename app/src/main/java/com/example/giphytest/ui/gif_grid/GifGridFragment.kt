@@ -16,7 +16,6 @@ import com.example.giphytest.constant.Constants
 import com.example.giphytest.constant.snack
 import com.example.giphytest.databinding.FragmentGifGridBinding
 import com.example.giphytest.ui.MainViewModel
-import com.google.android.material.transition.platform.Hold
 import com.google.android.material.transition.platform.MaterialElevationScale
 import com.jio.media.jioguard.base.BaseFragment
 
@@ -63,14 +62,14 @@ class GifGridFragment : BaseFragment<FragmentGifGridBinding, GifModel>() {
 
         binding.gifRecyclerView.addOnScrollListener(object : EndlessScrollListener(binding.gifRecyclerView.layoutManager as StaggeredGridLayoutManager) {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
-                viewModel?.requestTrendingGiphy(totalItemsCount)
+                viewModel?.requestTrendingGiphy(totalItemsCount, isFromPagination = true)
             }
         })
 
         shareModel.gifItemClick.observe(viewLifecycleOwner) {
             it?.let {
                 viewModel?.saveAdapterState()
-                exitTransition = Hold().apply {
+                exitTransition = MaterialElevationScale(false).apply {
                     duration = Constants.DURATION
                 }
                 reenterTransition = MaterialElevationScale(true).apply {

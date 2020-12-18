@@ -46,7 +46,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
     }
 
     override fun onNetworkChanged(message: String) {
-        binding.root.snack(message)
+        binding.root.snack("Please check your internet connection")
     }
 
 

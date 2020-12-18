@@ -32,7 +32,7 @@ class GifDetailFragment : BaseFragment<FragmentDetailBinding, GifDetailViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ViewCompat.setTransitionName(binding.ivGiphyDetail, shareModel.gifDetailData.value?.id)
+        ViewCompat.setTransitionName(binding.parentConstraintLayout, shareModel.gifDetailData.value?.id)
         binding.model = shareModel
         setUpUi()
         setUpListener()

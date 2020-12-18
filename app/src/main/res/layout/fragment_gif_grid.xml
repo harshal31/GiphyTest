@@ -45,7 +45,7 @@
                     app:flow_horizontalGap="@dimen/material_emphasis_medium"
                     app:flow_verticalGap="@dimen/material_emphasis_medium"
                     app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-                    app:spanCount="3" />
+                    app:spanCount="2" />
 
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

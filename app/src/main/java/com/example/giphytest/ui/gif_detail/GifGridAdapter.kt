@@ -54,8 +54,8 @@ class GifGridAdapter : RecyclerView.Adapter<GifGridAdapter.GifGridViewHolder>() 
         private val constraintSet = ConstraintSet()
 
         fun bindData(data: DataItem) {
-            ViewCompat.setTransitionName(bind.ivGiphy, data.id)
-            bind.ivGiphy.setOnClickListener {
+            ViewCompat.setTransitionName(bind.rootConstraint, data.id)
+            bind.rootConstraint.setOnClickListener {
                 viewModel?.gifItemClick?.value = Pair(it, list[adapterPosition])
             }
             with(constraintSet) {
