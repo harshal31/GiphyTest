@@ -2,6 +2,8 @@ package com.example.giphytest.constant
 
 import android.view.View
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -11,25 +13,29 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.transition.DrawableCrossFadeFactory
 import com.example.giphytest.R
+import com.google.android.material.appbar.MaterialToolbar
 
 object BindingAdapter {
 
     @BindingAdapter("gifUrl")
     @JvmStatic
     fun ImageView.onGifImageLoading(gifUrl: String?) {
-        Glide.with(context)
-            .load(gifUrl ?: "")
-            .transition(DrawableTransitionOptions.withCrossFade())
+        GlideApp
+            .with(context)
+            .load(gifUrl)
+            .placeholder(R.drawable.ic_baseline_gif_24)
             .diskCacheStrategy(DiskCacheStrategy.DATA)
+            .skipMemoryCache(true)
             .into(this)
     }
 
     @BindingAdapter("adapter")
     @JvmStatic
-    fun RecyclerView.setAdapter(adapter: RecyclerView.Adapter<*>?) {
+    fun RecyclerView.setAdapterOnRecyclerView(adapter: RecyclerView.Adapter<*>?) {
         if (adapter?.hasObservers()?.not() == true) {
             adapter.setHasStableIds(true)
         }
+
 
         this.adapter = adapter
     }
@@ -44,6 +50,14 @@ object BindingAdapter {
     @JvmStatic
     fun SwipeRefreshLayout.changeRefreshing(isRefresh: Boolean) {
         isRefreshing = isRefresh
+    }
+
+    @BindingAdapter("srcData")
+    @JvmStatic
+    fun MaterialToolbar.changeRefreshing(isChangeIcon: Boolean) {
+        if (isChangeIcon) {
+            navigationIcon = ContextCompat.getDrawable(context, R.drawable.ic_baseline_arrow_back_24)
+        }
     }
 
 }
