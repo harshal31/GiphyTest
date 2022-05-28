@@ -2,6 +2,7 @@ package com.example.giphytest.ui
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -36,6 +37,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         binding.materialToolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.gRating -> {
+                    Log.d("gRating", "setUpListener: ")
                     viewModel.menuRatingClicked.value = Constants.G_RATING
                     true
                 }
@@ -54,6 +56,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 else -> true
             }
         }
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
     override val getModel: Class<MainViewModel> = MainViewModel::class.java
