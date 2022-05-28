@@ -41,14 +41,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                     viewModel.menuRatingClicked.value = Constants.G_RATING
                     true
                 }
-                R.id.pgRating -> {
-                    viewModel.menuRatingClicked.value = Constants.PG_RATING
-                    true
-                }
-                R.id.rRating -> {
-                    viewModel.menuRatingClicked.value = Constants.R_RATING
-                    true
-                }
+
                 R.id.rgRating -> {
                     viewModel.menuRatingClicked.value = Constants.RG_RATING
                     true
